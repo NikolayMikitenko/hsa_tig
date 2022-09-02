@@ -19,7 +19,7 @@ services:
       - '127.0.0.1:8086:8086'
     volumes:
       - ./:/imports
-      - influxdb_data:/var/lib/influxdb:rw
+      - ./influxdb_data:/var/lib/influxdb:rw
 
   grafana:
     image: grafana/grafana:8.0.2
@@ -36,14 +36,14 @@ services:
       - ./grafana/dashboards/:/var/lib/grafana/dashboards/
 
   mongo:
-    image: mongo:5.0
+    image: mongo:4.2
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
-      - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./mongo-volums:/data/dashboards
-      #- ~/apps/mongo:/data/db
+            #- ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+            #- ./mongo-volums:/data/dashboards
+      - ~/apps/mongo:/data/db
     ports:
       - 27017:27017
 
